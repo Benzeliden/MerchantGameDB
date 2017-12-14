@@ -1,7 +1,7 @@
 
 angular.module("mainApp").service("filtersService", function () {
     var self = this;
-
+    
     self.isMatch = function (value, currentFilters) {
         var filter = currentFilters[value];
         return filter && filter.selected;
@@ -13,7 +13,8 @@ angular.module("mainApp").service("filtersService", function () {
             2: { title: "2" },
             3: { title: "3" },
             4: { title: "4" },
-            5: { title: "5" }
+            5: { title: "5" },
+            6: { title: "6" },
         }
     }
 

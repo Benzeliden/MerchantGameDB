@@ -955,6 +955,7 @@ function getQuestNamesByRegioName(name) {
 	else if(name == "Aldur Highlands"){regio = 3}
 	else if(name == "Vulkrum Badlands"){regio = 4}
 	else if(name == "Grimhal Volcano"){regio = 5}
+	else if(name == "Frentir Chasm"){regio = 6}
 
 	var names = [];
 	$.each(jsonQuests, function(index, val)

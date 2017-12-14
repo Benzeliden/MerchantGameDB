@@ -16,6 +16,7 @@ $(document).ready(function()  {
       "<li><a href='#!/heroes/Assassin'>Assassin</a></li>",
       "<li><a href='#!/heroes/Paladin'>Paladin</a></li>",
       "<li><a href='#!/heroes/Dark Knight'>Dark Knight</a></li>",
+      "<li><a href='#!/heroes/Bard'>Bard</a></li>",
     "</ul>"
   ].join("");
 
@@ -36,6 +37,7 @@ $(document).ready(function()  {
       "<li><a href='#!/regios/Aldur Highlands'>Aldur Highlands</a></li>",
       "<li><a href='#!/regios/Vulkrum Badlands'>Vulkrum Badlands</a></li>",
       "<li><a href='#!/regios/Grimhal Volcano'>Grimhal Volcano</a></li>",
+      "<li><a href='#!/regios/Frentir Chasm'>Frentir Chasm</a></li>",
     "</ul>"
   ].join("");
 

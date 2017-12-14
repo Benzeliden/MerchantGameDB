@@ -6,10 +6,11 @@ angular.module('mainApp')
 
 		$scope.bosses = jsonBosses;
 		$scope.quests = jsonQuests;
-
+		
 		var currentTimestamp = Math.floor(Date.now() / 1000);
 		for (var i = 0; i < jsonBosses.length; i++) {
 			var boss = jsonBosses[i]
+			boss.isBoost = boss.resultParams.length > 1
 			boss.startTimestamp = boss.detectParams[0]
 			boss.duration = boss.detectParams[1]
 			boss.endTimestamp = boss.startTimestamp + boss.duration
