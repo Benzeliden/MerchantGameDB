@@ -24,6 +24,20 @@ angular.module('mainApp')
 			return time;
     }
 	})
+
+	.filter('durationToDays', function(){
+		return function(input) {
+			var days = Math.round(input / 60 / 60 / 24);
+			var word;
+			if (days % 10 == 1) {
+				word = " day";
+			} else{
+				word = " days";
+			}
+
+			return days + word;
+		}
+	})
 	
 	//filter gives back 0 if given timestamp is in the past, 1 if in the future
 	.filter('curTimestamp',function() {

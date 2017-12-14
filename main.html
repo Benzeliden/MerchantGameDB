@@ -133,10 +133,10 @@
     <h4><span class="glyphicon glyphicon-chevron-right"></span>Scout out the Epic Bosses!</h4>
     <table class="home-content-table">
       <tbody>
-        <tr ng-repeat="boss in bosses" ng-if="boss.detectParams[0] + 604800 | curTimestamp">
+        <tr ng-repeat="boss in bosses" >
 					<td><a href="#!/quests/{{quests[boss.resultParams-1].name}}"><img ng-src="assets/{{quests[boss.resultParams-1].image}}"></a></td>
-					<td><a href="#!/quests/{{quests[boss.resultParams-1].name}}">{{quests[boss.resultParams-1].name}}</a></td>
-					<td>{{boss.detectParams[0] | timestampToDate}}</td>
+					<td><a href="#!/quests/{{quests[boss.resultParams-1].name}}">{{quests[boss.resultParams-1].name || boss.name}}</a></td>
+					<td>{{boss.startTimestamp | timestampToDate}} ({{(boss.duration) | durationToDays}})</td>
         </tr>
       </tbody>
     </table>
