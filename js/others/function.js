@@ -573,6 +573,7 @@ function regionById(id) {
 	else if (id == 3) { region = "Aldur Highlands"}
 	else if (id == 4) { region = "Vulkrum Badlands"}
 	else if (id == 5) { region = "Grimhal Volcano"}
+	else if (id == 6) { region = "Frentir Chasm"}
 	return region;
 }
 
