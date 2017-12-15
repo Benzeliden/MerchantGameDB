@@ -12,6 +12,8 @@ angular.module('mainApp')
 			
 		$scope.craft=usedToCraftFromMaterial($scope.materialID);
 
+		$scope.getTierOfMaterial = getTierOfMaterial
+
 		var redditLink = "["+$scope.material.name+"]" + " (" + window.location.href + ")";
 
 		$("#raw-url-link").click(function() {

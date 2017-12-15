@@ -331,8 +331,13 @@ function lvToTierAtPotion(lv) {
 	return Math.floor(((lv)/10)+1);
 }
 
-function lvToTierAtMaterials(lv) {
-	return Math.floor(((lv)/10)+1);
+function getTierOfMaterial(material) {
+	var t = material.itemLevel / 10 + 1
+	if (material.itemLevel % 10 == 0 && material.rarity > 2) {
+		//common lvl 20 material belong to t3, but rare and above belong to t2
+		t -= 1;
+	}
+	return Math.floor(t);
 }
 
 function getSuffixMod(suff) {

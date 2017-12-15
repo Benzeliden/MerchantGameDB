@@ -105,6 +105,8 @@ angular.module("mainApp").service("filtersService", function () {
             claw: { title: "Claw" },
             horn: { title: "Horn" },
             misc: { title: "Misc" },
+            fang: { title: "Fang" },
+            wing: { title: "Wing" },
         }
     }
 
