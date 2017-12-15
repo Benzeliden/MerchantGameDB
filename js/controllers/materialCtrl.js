@@ -8,10 +8,8 @@ angular.module('mainApp')
 			{ //if crafted
 			$scope.craftedBy = getMaterialById($scope.material.materialID, $scope.material.materialAmount)
 			}
-		else
-			{ //if dropped
-			$scope.droppedBy = getMonsterByMaterialId($scope.materialID);
-			}
+		$scope.droppedBy = getMonsterByMaterialId($scope.materialID);
+			
 		$scope.craft=usedToCraftFromMaterial($scope.materialID);
 
 		var redditLink = "["+$scope.material.name+"]" + " (" + window.location.href + ")";
