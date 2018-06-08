@@ -16,7 +16,7 @@
         }
     }
     var myComponentDefinition = {
-        templateUrl: "/templates/item-url-component.html",
+        templateUrl: "templates/item-url-component.html",
 
         bindings: {
             redditName: '<',

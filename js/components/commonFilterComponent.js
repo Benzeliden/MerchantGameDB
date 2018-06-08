@@ -52,7 +52,7 @@
         }
     }
     var myComponentDefinition = {
-        templateUrl: "/templates/common-filter-component.html",
+        templateUrl: "templates/common-filter-component.html",
 
         bindings: {
             options: '<',
