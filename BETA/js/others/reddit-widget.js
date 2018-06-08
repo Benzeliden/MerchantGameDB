@@ -4,7 +4,7 @@ window.setTimeout(function () {
   var maxtbns = 14;
   var maxrddts = 10;
   $.getJSON(
-    "http://www.reddit.com/r/MerchantRPG.json?sort=top&t=week&limit=40&jsonp=?",
+    "https://www.reddit.com/r/MerchantRPG.json?sort=top&t=week&limit=40&jsonp=?",
     function foo(data) {
       $.each(
         data.data.children,
