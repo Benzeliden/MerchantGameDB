@@ -274,7 +274,7 @@ gulp.task('sprites', function (callback) {
       style: './all-spritesheets.css',
       name: spritesheetName,
       prefix: prefixName,
-      cssPath: "img/spritesheets/",
+      cssPath: "/MerchantGameDB/img/spritesheets/",
       orientation: "binary-tree",
       margin: 0
     }).pipe(gulpif('*.png', gulp.dest('./img/spritesheets/'), gulp.dest('./tempSprites/')));
