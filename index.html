@@ -14,9 +14,9 @@
     <!-- Stylesheets -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
     <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" href="css/angular-snap.css">
-    <link rel="stylesheet" href="css/angucomplete-alt.css">
-    <link rel="stylesheet" href="css/all-spritesheets.css">
+    <link rel="stylesheet" href="/MerchantGameDB/css/angular-snap.css">
+    <link rel="stylesheet" href="/MerchantGameDB/css/angucomplete-alt.css">
+    <link rel="stylesheet" href="/MerchantGameDB/css/all-spritesheets.css">
   </head>
   <body ng-controller="bodyCtrl">
     <!--[if lt IE 8]>
@@ -116,13 +116,13 @@
 		
       <div id="live-beta-button-hold-mobile">
         <div class="live-button">
-          <a href="/#!/">
+          <a href="/MerchantGameDB/#!/">
             <span class="glyphicon glyphicon-check"></span>
             LIVE (V{{liveVersion}})
           </a>
         </div>
         <div class="beta-button version-inactive">
-          <a href="/BETA/#!/">
+          <a href="/MerchantGameDB/BETA/#!/">
             <span class="glyphicon glyphicon-unchecked"></span>
             BETA (V{{betaVersion}})
           </a>
@@ -137,13 +137,13 @@
 		
     <div id="live-beta-button-hold" ng-cloak>
       <div class="live-button">
-        <a href="/#!/">
+        <a href="/MerchantGameDB/#!/">
           <span class="glyphicon glyphicon-check"></span>
           LIVE (V{{liveVersion}})
         </a>
       </div>
       <div class="beta-button version-inactive">
-        <a href="/BETA/#!/">
+        <a href="/MerchantGameDB/BETA/#!/">
           <span class="glyphicon glyphicon-unchecked"></span>
           BETA (V{{betaVersion}})
         </a>
@@ -210,7 +210,7 @@
               <li><a id="item-link" href="#!/">Items <span class='glyphicon glyphicon-chevron-down'></span></li></a>
               <li><a id="region-link" href="#!/">Regions <span class='glyphicon glyphicon-chevron-down'></span></li></a>
               <li><a id="tool-link" href="#!/tools">Tools</li></a>
-              <li><a id="guide-link" href="https://merchantrpg.wikia.com/wiki/Guides/Game">Wiki Guide</li></a>
+              <li><a id="guide-link" href="https://merchantrpg.wikia.com/wiki/Guides/Game" target="_blank">Wiki Guide</li></a>
               <li class='menu-community'><a href="https://www.reddit.com/r/MerchantRPG/"><img src="img/Icn_Hero_Party.png" alt="Join the Community!">Community</li></a>
             </ul>
             <div id='sub-menu-hold'>
@@ -225,14 +225,6 @@
 			       <div ng-view autoscroll ng-cloak></div>
 
              <div class="clear"></div>
-
-						 <div id="commentsButton" class="btn btn-info">
-              <span class="load-discussion">Join Discussion</span>
-              <span id="comment-icon" class="glyphicon glyphicon-comment"></span>
-             </div>
-						 <div id="comments">
-        			<div id="disqus_thread"></div>
-						</div>
           </div>
 
           <aside id="side-bar" class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
@@ -370,11 +362,11 @@
 
     </snap-content>
     <!-- Javascripts: jQuery, AngularJS, ngSanitize, ngRoute, Bootstrap -->
-    <script src="js/vendor/jquery-1.12.1.min.js"></script>
-    <script src="js/vendor/angular-1.5.11.min.js"></script>
-    <script src="js/vendor/fuse.3.0.4.min.js"></script>
-    <script src="js/modules/angular-sanitize.min.js"></script>
-    <script src="js/modules/angular-route.min.js"></script>
+    <script src="/MerchantGameDB/js/vendor/jquery-1.12.1.min.js"></script>
+    <script src="/MerchantGameDB/js/vendor/angular-1.5.11.min.js"></script>
+    <script src="/MerchantGameDB/js/vendor/fuse.3.0.4.min.js"></script>
+    <script src="/MerchantGameDB/js/modules/angular-sanitize.min.js"></script>
+    <script src="/MerchantGameDB/js/modules/angular-route.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
       crossorigin="anonymous"></script>
 

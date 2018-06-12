@@ -1,9 +1,3 @@
-//show comments
-$(document).on("click", "#commentsButton", function(){
-		$("#comments").show();
-		resetDisqus();
-		$("#commentsButton").hide();
-	});
 
 function getSuffixMod(suff) {
 	if(jsonSuffixes[suff].hasOwnProperty("stats")) {

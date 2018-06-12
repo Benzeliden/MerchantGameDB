@@ -13,13 +13,13 @@ module.exports = {
     ignored: 'node_modules'
   },
   server: {
-    baseDir: './',
+    baseDir: '../',
     middleware: [
       //log({ format: '%date %status %method %url' }),
       fallback({
-        index: '/index.html',
+        index: '/MerchantGameDB/index.html',
         rewrites: [
-          { from: /\/BETA/, to: '/BETA/index.html'}
+          { from: /\/BETA/, to: '/MerchantGameDB/BETA/index.html'}
         ],
         htmlAcceptHeaders: ['text/html', 'application/xhtml+xml'] // systemjs workaround
       })

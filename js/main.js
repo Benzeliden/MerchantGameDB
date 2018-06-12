@@ -113,17 +113,6 @@ var mainApp = angular.module('mainApp', ['snap', 'angucomplete-alt', 'ngRoute', 
 			controller: 'toolCtrl'
 		})
 
-	// Route for guides page
-	.when('/guides', {
-		templateUrl: 'pages/guides.html',
-		controller: 'guidesCtrl'
-	})
-    // Route for the individual guide pages
-    .when('/guides/:id', {
-  		templateUrl: 'pages/guide.html',
-  		controller: 'guideCtrl'
-  	})
-
 	// Route for ANY other option not covered above
   // Directs back to home page
 	.when('/', {
@@ -163,10 +152,5 @@ var mainApp = angular.module('mainApp', ['snap', 'angucomplete-alt', 'ngRoute', 
 		//change title
 		document.title = prefix + " " + baseName + " " +suffix + " - MerchantDB"
 		window.scrollTo(0, 0);
-
-		/** RELOAD DISQUS ON ROUTE CHANGE **/
-		$("#comments").hide();
-		$("#commentsButton").show();
-		//initDisqus();
 	});
 }]);
