@@ -11,33 +11,45 @@
   <common-filter title="Blacksmith Subtype" css-class="weapons-subtype-options col-xs-12 col-sm-12" options="BlacksmithFilter"></common-filter>
   <common-filter title="Woodworker Subtype" css-class="weapons-subtype-options col-xs-12 col-sm-12" options="WoodworkerFilter"></common-filter>
   <common-filter title="Special Subtype" css-class="weapons-subtype-options col-xs-12 col-sm-12" options="SpecialFilter"></common-filter>
-  <common-filter title="Stats Filter" css-class="weapons-subtype-options col-xs-12 col-sm-12" break-count="4"
-       options="StatsFilter" on-filter-changed="setStatsFiter($countSelected, $isAllSelected)"></common-filter>
+  <common-filter title="Stats Filter" css-class="weapons-subtype-options col-xs-12 col-sm-12" break-count="4" options="StatsFilter"
+    on-filter-changed="setStatsFilter($countSelected, $isAllSelected)"></common-filter>
 </div>
 
 <table class="filtered-gear-table">
+  <caption>
+    <filter-count number-of-items="filteredItems.length" number-after-filter="filteredAndLimited.length"></filter-count>
+  </caption>
   <thead>
     <tr>
       <th class="center"></th>
       <th>Name</th>
-      <th class="center">Cost/<br>Level</th>
+      <th class="center">Cost/
+        <br>Level</th>
     </tr>
   </thead>
-  <tbody ng-repeat="item in equipment | orderBy : 'itemLevel' | filter:{itemSlot:1} | filter:showWeaponsByType | filter:showWeaponsByTier | filter:showWeaponByStat">
+  <tbody ng-repeat="item in filteredItems = (equipment | filter:finalFilter) | limitTo:60 | orderBy : 'itemLevel' as filteredAndLimited">
     <tr>
-		<td rowspan="3" class="center"><div ng-class="::item.image | imageToCssClass"></div></td>
-		<td><a class='quality-{{item.rarity}}' href="#!/items/weapon/{{item.name}}">{{item.name}}</a></td>
-		<td class="center">{{item.cost}}<img style="width:12px" src="img/coin.png"></td>
+      <td rowspan="3" class="center">
+        <div ng-class="::item.image | imageToCssClass"></div>
+      </td>
+      <td>
+        <a class='quality-{{item.rarity}}' href="#!/items/weapon/{{item.name}}">{{item.name}}</a>
+      </td>
+      <td class="center">{{item.cost}}
+        <img style="width:12px" src="img/coin.png">
+      </td>
     </tr>
-	<tr>
-		<td>Atk: ~{{formula[item.subType].atkBase + formula[item.subType].atkLvl*item.itemLevel | number:0}}
-			mAtk: ~{{formula[item.subType].matkBase + formula[item.subType].matkLvl*item.itemLevel | number:0}}
-			Acc: ~{{formula[item.subType].accBase + formula[item.subType].accLvl*item.itemLevel | number:0}}</td>
-		<td></td>
-	</tr>
-	<tr>
-		<td><span ng-repeat="(statName, statVal) in item.bonusStat">{{statName | changeStat}}: ~{{(statVal[0]+statVal[1])/2 | fixPercentStat : statName | number:0}} </span></td>
-		<td class="center">Lv. {{item.itemLevel}}</td>
-	</tr>
+    <tr>
+      <td>Atk: ~{{formula[item.subType].atkBase + formula[item.subType].atkLvl*item.itemLevel | number:0}} mAtk: ~{{formula[item.subType].matkBase
+        + formula[item.subType].matkLvl*item.itemLevel | number:0}} Acc: ~{{formula[item.subType].accBase + formula[item.subType].accLvl*item.itemLevel
+        | number:0}}</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>
+        <span ng-repeat="(statName, statVal) in item.bonusStat">{{statName | changeStat}}: ~{{(statVal[0]+statVal[1])/2 | fixPercentStat : statName | number:0}} </span>
+      </td>
+      <td class="center">Lv. {{item.itemLevel}}</td>
+    </tr>
   </tbody>
 </table>

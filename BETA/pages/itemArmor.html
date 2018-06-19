@@ -5,34 +5,48 @@
 <div class="armors-page-filters row">
   <h2>Filtering Options</h2>
   <common-filter title="Tier" css-class="armors-tier-options col-xs-12 col-sm-12" options="TiersFilter"></common-filter>
-  <common-filter title="Armorsmith Subtype" css-class="armors-subtype-options col-xs-12 col-sm-12" options="ArmorsmithFilter" break-count="4"></common-filter>
-  <common-filter title="ClothWorker Subtype" css-class="armors-subtype-options col-xs-12 col-sm-12" options="ClothWorkerFilter" break-count="4"></common-filter>
-  <common-filter title="Stats Filter" css-class="armors-subtype-options col-xs-12 col-sm-12" break-count="4"
-        options="StatsFilter" on-filter-changed="setStatsFiter($countSelected, $isAllSelected)"></common-filter>
+  <common-filter title="Armorsmith Subtype" css-class="armors-subtype-options col-xs-12 col-sm-12" options="ArmorsmithFilter"
+    break-count="4"></common-filter>
+  <common-filter title="ClothWorker Subtype" css-class="armors-subtype-options col-xs-12 col-sm-12" options="ClothWorkerFilter"
+    break-count="4"></common-filter>
+  <common-filter title="Stats Filter" css-class="armors-subtype-options col-xs-12 col-sm-12" break-count="4" options="StatsFilter"
+    on-filter-changed="setStatsFilter($countSelected, $isAllSelected)"></common-filter>
 </div>
 
 <table class="filtered-gear-table">
+  <caption>
+    <filter-count number-of-items="filteredItems.length" number-after-filter="filteredAndLimited.length"></filter-count>
+  </caption>
   <thead>
     <tr>
       <th class="center"></th>
       <th>Name</th>
-      <th class="center">Cost/<br>Level</th>
+      <th class="center">Cost/
+        <br>Level</th>
     </tr>
   </thead>
-  <tbody ng-repeat="item in equipment | orderBy : 'itemLevel' | filter:itemSlot | filter:showArmorsByType:true | filter:showArmorsByTier | filter:showArmorsByStat">
+  <tbody ng-repeat="item in filteredItems = (equipment | filter:finalFilter) | limitTo:60 | orderBy : 'itemLevel' as filteredAndLimited">
     <tr>
-		<td rowspan="3" class="center"><div ng-class="::item.image | imageToCssClass"></div></td>
-		<td><a class='quality-{{item.rarity}}' href="#!/items/armor/{{item.name}}">{{item.name}}</a></td>
-		<td class="center">{{item.cost}}<img style="width:12px" src="img/coin.png"></td>
+      <td rowspan="3" class="center">
+        <div ng-class="::item.image | imageToCssClass"></div>
+      </td>
+      <td>
+        <a class='quality-{{item.rarity}}' href="#!/items/armor/{{item.name}}">{{item.name}}</a>
+      </td>
+      <td class="center">{{item.cost}}
+        <img style="width:12px" src="img/coin.png">
+      </td>
     </tr>
-	<tr>
-		<td>Def: ~{{formula[item.subType].defBase + formula[item.subType].defLvl*item.itemLevel | number:0}} 
-			mDef: ~{{formula[item.subType].mdefBase + formula[item.subType].mdefLvl*item.itemLevel | number:0}}</td>
-		<td></td>
-	</tr>
-	<tr>
-		<td><span ng-repeat="(statName, statVal) in item.bonusStat">{{statName | changeStat}}: ~{{(statVal[0]+statVal[1])/2 | fixPercentStat : statName | number:0}} </span></td>
-		<td class="center">Lv. {{item.itemLevel}}</td>
-	</tr>	
+    <tr>
+      <td>Def: ~{{formula[item.subType].defBase + formula[item.subType].defLvl*item.itemLevel | number:0}} mDef: ~{{formula[item.subType].mdefBase
+        + formula[item.subType].mdefLvl*item.itemLevel | number:0}}</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>
+        <span ng-repeat="(statName, statVal) in item.bonusStat">{{statName | changeStat}}: ~{{(statVal[0]+statVal[1])/2 | fixPercentStat : statName | number:0}} </span>
+      </td>
+      <td class="center">Lv. {{item.itemLevel}}</td>
+    </tr>
   </tbody>
 </table>

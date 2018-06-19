@@ -6,10 +6,13 @@
   <h2>Filtering Options</h2>
 
   <div class="clear"></div>
-  <common-filter title="Tier" css-class="materials-tier-options col-xs-12 col-sm-12" options="TiersFilter"></common-filter>  
-  <common-filter title="Subtype" css-class="materials-subtype-options col-xs-12 col-sm-12" options="SubtypesFilter"></common-filter>	
+  <common-filter title="Tier" css-class="materials-tier-options col-xs-12 col-sm-12" options="TiersFilter"></common-filter>
+  <common-filter title="Subtype" css-class="materials-subtype-options col-xs-12 col-sm-12" options="SubtypesFilter"></common-filter>
 </div>
 <table class="filtered-gear-table">
+  <caption>
+    <filter-count number-of-items="filteredItems.length" number-after-filter="filteredItems.length"></filter-count>
+  </caption>
   <thead>
     <tr>
       <th class="center"></th>
@@ -17,15 +20,19 @@
       <th class="center">Level</th>
     </tr>
   </thead>
-  <tbody ng-repeat="item in material | orderBy : 'itemLevel' | filter:showMaterialsByType:true | filter:showMaterialsByTier">
+  <tbody ng-repeat="item in material | orderBy : 'itemLevel' | filter:showMaterialsByType:true | filter:showMaterialsByTier as filteredItems">
     <tr>
-		<td rowspan="3" class="center"><div ng-class="::item.image | imageToCssClass"></div></td>
-		<td><a class='quality-{{item.rarity}}' href="#!/items/material/{{item.name}}">{{item.name}}</a></td>
-		<td class="center">Lv. {{item.itemLevel}}</td>
+      <td rowspan="3" class="center">
+        <div ng-class="::item.image | imageToCssClass"></div>
+      </td>
+      <td>
+        <a class='quality-{{item.rarity}}' href="#!/items/material/{{item.name}}">{{item.name}}</a>
+      </td>
+      <td class="center">Lv. {{item.itemLevel}}</td>
     </tr>
-	<tr>
-		<td>{{item.desc1}} {{item.desc2}}</td>
-		<td class="center"></td>
-	</tr>	
+    <tr>
+      <td>{{item.desc1}} {{item.desc2}}</td>
+      <td class="center"></td>
+    </tr>
   </tbody>
 </table>

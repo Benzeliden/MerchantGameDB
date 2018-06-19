@@ -156,6 +156,7 @@ angular.module("mainApp").service("filtersService", function () {
         "str": "Str",
         "dex": "Dex",
         "int": "Int",
+        "speed": "Speed",
         "apMod": "AP",
         "gldMod": "Gold",
     }

@@ -2,13 +2,6 @@
 angular.module('mainApp')
 	.controller('itemArmorCtrl', function ($scope, $routeParams, filtersService) {
 
-		$scope.itemSlot = function (item) {
-			return item.itemSlot == 2 ||
-				item.itemSlot == 3 ||
-				item.itemSlot == 4 ||
-				item.itemSlot == 5;
-		};
-
 		$scope.equipment = jsonEquipments;
 		$scope.formula = jsonFormulas;
 		$scope.TiersFilter = filtersService.getTiers();
@@ -17,21 +10,32 @@ angular.module('mainApp')
 		$scope.StatsFilter = filtersService.getStatsFilter();
 		$scope.ignoreStatsFilter = true
 
-		$scope.showArmorsByType = function (item) {
+		function itemSlot(item) {
+			return item.itemSlot == 2 ||
+				item.itemSlot == 3 ||
+				item.itemSlot == 4 ||
+				item.itemSlot == 5;
+		};
+
+		function showArmorsByType(item) {
 			return filtersService.isMatch(item.subType, $scope.ArmorsmithFilter)
 				|| filtersService.isMatch(item.subType, $scope.ClothWorkerFilter);
 		};
 
-		$scope.showArmorsByTier = function (item) {
+		function showArmorsByTier(item) {
 			return filtersService.isMatch(item.dbTier, $scope.TiersFilter);
 		};
 
-		$scope.showArmorsByStat = function (item) {
+		function showArmorsByStat(item) {
 			return $scope.ignoreStatsFilter
 				|| filtersService.filterStats(item.bonusStat, $scope.StatsFilter)
 		}
 
-		$scope.setStatsFiter = function (countSelected, isAllSelected) {
+		$scope.setStatsFilter = function (countSelected, isAllSelected) {
 			$scope.ignoreStatsFilter = countSelected == 0 || isAllSelected
+		}
+
+		$scope.finalFilter = function (item) {
+			return itemSlot(item) && showArmorsByType(item) && showArmorsByTier(item) && showArmorsByStat(item)
 		}
 	})

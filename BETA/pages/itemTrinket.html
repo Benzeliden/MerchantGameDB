@@ -6,10 +6,13 @@
   <h2>Filtering Options</h2>
   <common-filter title="Tier" css-class="trinkets-tier-options col-xs-12 col-sm-12" options="TiersFilter"></common-filter>
   <common-filter title="Subtype" css-class="trinkets-tier-options col-xs-12 col-sm-12" options="TypesFilter"></common-filter>
-  <common-filter title="Stats Filter" css-class="trinkets-tier-options col-xs-12 col-sm-12" break-count="4"
-        options="StatsFilter" on-filter-changed="setStatsFiter($countSelected, $isAllSelected)"></common-filter>
+  <common-filter title="Stats Filter" css-class="trinkets-tier-options col-xs-12 col-sm-12" break-count="4" options="StatsFilter"
+    on-filter-changed="setStatsFilter($countSelected, $isAllSelected)"></common-filter>
 </div>
 <table class="filtered-gear-table">
+  <caption>
+    <filter-count number-of-items="filteredItems.length" number-after-filter="filteredAndLimited.length"></filter-count>
+  </caption>
   <thead>
     <tr>
       <th class="center"></th>
@@ -17,15 +20,21 @@
       <th class="center">Level</th>
     </tr>
   </thead>
-  <tbody ng-repeat="item in equipment | orderBy : 'itemLevel' | filter:{itemSlot:6} | filter:showTrinketsByTier | filter:showTrinketsByType | filter:showTrinketByStat">
+  <tbody ng-repeat="item in filteredItems = (equipment | filter:finalFilter) | limitTo:60 | orderBy : 'itemLevel' as filteredAndLimited">
     <tr>
-		<td rowspan="2" class="center"><div ng-class="::item.image | imageToCssClass"></div></td>
-		<td><a class='quality-{{item.rarity}}' href="#!/items/trinket/{{item.name}}">{{item.name}}</a><br>{{item.desc1}}</td>
-		<td class="center">Lv. {{item.itemLevel}}</td>
+      <td rowspan="2" class="center">
+        <div ng-class="::item.image | imageToCssClass"></div>
+      </td>
+      <td>
+        <a class='quality-{{item.rarity}}' href="#!/items/trinket/{{item.name}}">{{item.name}}</a>
+        <br>{{item.desc1}}</td>
+      <td class="center">Lv. {{item.itemLevel}}</td>
     </tr>
-	<tr>
-		<td><span ng-repeat="(statName, statVal) in item.bonusStat">{{statName | changeStat}}: ~{{(statVal[0]+statVal[1])/2 | fixPercentStat : statName | number:0}} </span></td>
-		<td class="center"></td>
-	</tr>
+    <tr>
+      <td>
+        <span ng-repeat="(statName, statVal) in item.bonusStat">{{statName | changeStat}}: ~{{(statVal[0]+statVal[1])/2 | fixPercentStat : statName | number:0}} </span>
+      </td>
+      <td class="center"></td>
+    </tr>
   </tbody>
 </table>
