@@ -10,7 +10,7 @@
 
     }
     var myComponentDefinition = {
-        templateUrl: "/templates/filter-count-component.html",
+        templateUrl: "templates/filter-count-component.html",
 
         bindings: {
             numberOfItems: '<',
