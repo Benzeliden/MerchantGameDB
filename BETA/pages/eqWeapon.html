@@ -12,6 +12,8 @@
   
     <!-- Prefix Adjustment -->
     <div item-prefix></div>
+
+    <div item-prestige></div>
   
     <!-- Copy URL Button -->
     <div item-page-copy-button></div>
@@ -25,7 +27,7 @@
           <h3 class="quality-{{::finalRarity}}">
             <span id="prefix-hold">{{::prefixStat.name}} </span>
             <span class="item-name">{{::item.name}}</span> 
-            <span ng-if="hasSuffix">+<span id="suffix-alone">{{suffix}}</span></span>
+            <span ng-if="hasSuffix"><span id="suffix-alone">{{listOfSuffix[suffix].name}}</span></span>
           </h3>
         </td>
         <td class='gear-cost'>
@@ -40,25 +42,25 @@
         <td class='gear-tier'>Tier {{item.dbTier}}</td>
       </tr>
       <tr>
-        <td colspan=2>{{Math.ceil(Math.ceil( (itemBaseStat.atkBase + itemBaseStat.atkLvl*item.itemLevel) * minGradeModifier ) * suffixMod ) | number:0}} - 
-                      {{Math.ceil(Math.ceil( (itemBaseStat.atkBase + itemBaseStat.atkLvl*item.itemLevel) * maxGradeModifier ) * suffixMod ) | number:0}} Physical Attack</td>
+        <td colspan=2>{{Math.ceil(Math.ceil( itemAtk * minGradeModifier ) * suffixMod ) | number:0}} - 
+                      {{Math.ceil(Math.ceil( itemAtk * maxGradeModifier ) * suffixMod ) | number:0}} Physical Attack</td>
       </tr>
       <tr>
-        <td colspan=2>{{Math.ceil(Math.ceil( (itemBaseStat.matkBase + itemBaseStat.matkLvl*item.itemLevel) * minGradeModifier ) * suffixMod ) | number: 0}} - 
-                      {{Math.ceil(Math.ceil( (itemBaseStat.matkBase + itemBaseStat.matkLvl*item.itemLevel) * maxGradeModifier ) * suffixMod ) | number: 0}} Magical Attack</td>
+        <td colspan=2>{{Math.ceil(Math.ceil( itemMatk * minGradeModifier ) * suffixMod ) | number: 0}} - 
+                      {{Math.ceil(Math.ceil( itemMatk * maxGradeModifier ) * suffixMod ) | number: 0}} Magical Attack</td>
       </tr>
       <tr>
-        <td colspan=2>{{Math.ceil(Math.ceil( (itemBaseStat.accBase + itemBaseStat.accLvl*item.itemLevel) * minGradeModifier ) * suffixMod ) | number:0}} - 
-                      {{Math.ceil(Math.ceil( (itemBaseStat.accBase + itemBaseStat.accLvl*item.itemLevel) * maxGradeModifier ) * suffixMod ) | number:0}} Accuracy</td>
+        <td colspan=2>{{Math.ceil(Math.ceil( itemAcc * minGradeModifier ) * suffixMod ) | number:0}} - 
+                      {{Math.ceil(Math.ceil( itemAcc * maxGradeModifier ) * suffixMod ) | number:0}} Accuracy</td>
       </tr>
   
        <!-- Bonus Stats -->
       <tr class='bonus-stat-row'>
         <td colspan=2 class='bonus-stats'>Additional Stats</td>
       </tr>
-      <tr ng-repeat="(key, value) in item.bonusStat">
+      <tr ng-repeat="(key, value) in bonusStats">
         <td colspan=2>
-          {{key | changeStat}}: {{value[0] | grade:minGradeModifier }}-{{ value[1] | grade:maxGradeModifier}}
+          {{key | changeStat}}: {{ value[0] }}-{{ value[1] }}
         </td>
       </tr>
       <tr ng-show="prefix">

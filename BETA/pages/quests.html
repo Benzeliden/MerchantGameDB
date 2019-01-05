@@ -1,6 +1,6 @@
 <div class='quest-image-holder'>
 	<img class='quest-image-background' src='/MerchantGameDB/img/tier-{{::quest.region}}-background.png'>
-	<img class='quest-image-monster' ng-src="/MerchantGameDB/img/Enemies/{{quest.enemyImage}}.png">
+	<div class='quest-image-monster' ng-class="::quest.enemyImage | imageToCssClass:'ico-qimg'"></div>
 </div>
 
 <div class="quest-grade-luck-hold grade-adjustment-hold">

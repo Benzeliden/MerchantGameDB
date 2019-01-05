@@ -21,7 +21,7 @@
   "homepage": "https://github.com/Chirpizard/MerchantGameDB#readme",
   "devDependencies": {
     "fs-extra": "^5.0.0",
-    "lite-server": "^2.2.2",
+    "lite-server": "^2.4.0",
     "run-sequence": "^2.2.0"
   },
   "dependencies": {
@@ -32,9 +32,9 @@
     "gulp-if": "^2.0.2",
     "gulp-jsoncombine": "^1.0.3",
     "gulp-ng-annotate": "^2.0.0",
-    "gulp-order": "^1.1.1",
+    "gulp-order": "^1.2.0",
     "gulp-sass": "^3.1.0",
     "gulp-uglify": "^1.5.3",
-    "sprity": "^1.0.8"
+    "gulp.spritesmith": "^6.9.0"
   }
 }

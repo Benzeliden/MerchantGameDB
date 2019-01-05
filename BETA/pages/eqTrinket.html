@@ -10,6 +10,8 @@
   <!-- Prefix Adjustment -->
   <div item-prefix></div>
 
+  <div item-prestige></div>
+
   <!-- Copy URL Button -->
   <div item-page-copy-button></div>
 
@@ -42,7 +44,7 @@
         "{{item.desc1}}"
       </td>
     </tr>
-    <tr ng-repeat="(key, value) in item.bonusStat">
+    <tr ng-repeat="(key, value) in bonusStats">
       <td colspan=2>
         {{key | changeStat}}: {{value[0] | grade:minGradeModifier }}-{{ value[1] | grade:maxGradeModifier}}
       </td>
