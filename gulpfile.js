@@ -157,17 +157,19 @@ gulp.task('regenerate-search', function (callback) {
       toSave.push({
         name: quest.name,
         type: "Quest",
-        subType: quest.title || "Normal",
+        subType: (quest.title || "Normal") + ". Region " + quest.region,
         rarity: "1",
         icon: quest.image,
+        gid: i
       });
       if (quest.nameB != null) {
         toSave.push({
           name: quest.nameB,
           type: "Quest",
-          subType: quest.titleB || "Rare",
+          subType: (quest.titleB || "Rare") + ". Region " + quest.region,
           rarity: "1",
           icon: quest.image, //imageB is not used in the game currently
+          gid: i
         });
       }
     } else {
@@ -215,38 +217,16 @@ gulp.task('pack-json', function () {
 gulp.task('sprites', function (callback) {
   var fs_extra = require('fs-extra')
   var gulpif = require('gulp-if');
-  var sprity = require('sprity');
+  var spritesmith = require('gulp.spritesmith');
   var jsonPath = "./json/";
-  var equip = JSON.parse(fs.readFileSync(jsonPath + 'EquipmentList.json'));
-  var mats = JSON.parse(fs.readFileSync(jsonPath + 'MaterialList.json'));
-  var potions = JSON.parse(fs.readFileSync(jsonPath + 'PotionList.json'));
   var quests = JSON.parse(fs.readFileSync(jsonPath + 'QuestList.json'));
   var skills = JSON.parse(fs.readFileSync(jsonPath + 'AbilityList.json'));
-
-  for (var i = 0; i < equip.length; i++) {
-    var item = equip[i];
-    if (item.itemSlot && item.image) {
-      fs_extra.copySync("./assets/" + item.image, "./tempSprites/" + item.image, { overwrite: false });
-    }
-  }
-  for (var i = 0; i < mats.length; i++) {
-    var item = mats[i];
-    if (item.image && item.image.substr(-1) != "/" &&
-      item.image != "Materials/Region_6/Chieftains_Blade.png") {
-      fs_extra.copySync("./assets/" + item.image, "./tempSprites/" + item.image, { overwrite: false });
-    }
-  }
-  for (var i = 0; i < potions.length; i++) {
-    var item = potions[i];
-    if (item.image && item.image.substr(-1) != "/") {
-      fs_extra.copySync("./assets/" + item.image, "./tempSprites/" + item.image, { overwrite: false });
-    }
-  }
 
   for (var i = 0; i < quests.length; i++) {
     var quest = quests[i];
     if (quest.title != "Placeholder" && quest.image.substr(-1) != "/") {
-      fs_extra.copySync("./assets/" + quest.image, "./tempSprites/" + quest.image, { overwrite: false });
+      fs_extra.copySync("./assets/Quests/" + quest.image + ".png", "./tempSprites/Quests/" + quest.image + ".png", { overwrite: false });
+      console.log("processing", quest.image)
     }
   }
   var used = {};
@@ -260,7 +240,7 @@ gulp.task('sprites', function (callback) {
     }
   }
 
-  var successRequire = 6, successCurrent = 0;
+  var successRequire = 2, successCurrent = 0;
   function makeCallbacks(stream) {
     stream.on('end', function () { console.log("success + 1"); successCurrent++; if (successCurrent == successRequire) { callback(); } });
     stream.on('error', function (err) { console.log("error", err); callback(err); });
@@ -268,30 +248,71 @@ gulp.task('sprites', function (callback) {
   }
 
   function makeImgStream(folderName, spritesheetName, prefixName) {
+    function spriteToCssClass(sprite) {
+      let sourceImg = sprite.source_image
+      let idx = sourceImg.indexOf("tempSprites") + 12 + folderName.length + 1
+      let finalClass = sourceImg.substr(idx, sourceImg.length - idx - 4).replace("\\", "-")
+      return '.' + prefixName + "-" + finalClass
+    }
 
-    var stream = sprity.src({
-      src: './tempSprites/' + folderName + '/**/*.png',
-      style: './all-spritesheets.css',
-      name: spritesheetName,
-      prefix: prefixName,
-      cssPath: "/MerchantGameDB/img/spritesheets/img/spritesheets/",
-      orientation: "binary-tree",
-      margin: 0
-    }).pipe(gulpif('*.png', gulp.dest('./img/spritesheets/'), gulp.dest('./tempSprites/')));
+    var spriteData = gulp
+      .src('./tempSprites/' + folderName + '/**/*.png')
+      .pipe(spritesmith({
+        imgName: spritesheetName + '.png',
+        cssName: spritesheetName + '.css',
+        imgPath: "/img/spritesheets/" + spritesheetName + ".png",
+        cssTemplate: function (data) {
+
+          var spriteW = data.sprites[0].width
+          var spriteH = data.sprites[0].height
+          var sameSize = true
+
+          for (var i = 1; i < data.sprites.length; i++) {
+            if (data.sprites[i].width != spriteW || data.sprites[i].height != spriteH) {
+              sameSize = false
+              break
+            }
+          }
+
+          var result = `.${prefixName} {background-image:url(${data.spritesheet.image})`
+
+          if (sameSize) {
+            result = result + `;width:${data.sprites[0].px.width};height:${data.sprites[0].px.height}`
+          }
+          result = result + "}"
+
+          for (var i = 0; i < data.sprites.length; i++) {
+            var sprite = data.sprites[i]
+            result = result + `${spriteToCssClass(sprite)}{background-position:${sprite.px.offset_x} ${sprite.px.offset_y}`
+
+            if (!sameSize) {
+              result = result + `;width:${sprite.px.width};height:${sprite.px.height}`
+            }
+            result = result + "}"
+          }
+
+          return result;
+        },
+        cssOpts: {
+          cssSelector: spriteToCssClass
+        }
+      }));
+
+    var stream = spriteData.pipe(
+      gulpif('*.png', gulp.dest('./img/spritesheets/'), gulp.dest('./tempSprites/')));
+      
+    console.log("wtf")
     makeCallbacks(stream);
   }
 
-  makeImgStream("Materials", "materials_sprites", "ico-mat");
-  makeImgStream("Armor", "armor_sprites", "ico-armor");
-  makeImgStream("Weapons", "weap_sprites", "ico-weap");
-  makeImgStream("Consumables", "pot_sprites", "ico-pot");
   makeImgStream("Quests", "quests_sprites", "ico-quest");
   makeImgStream("Skills", "skills_sprites", "ico-skill");
 });
 
 gulp.task('sprites-css-min', function () {
-  return gulp.src("tempSprites/all-spritesheets.css")
+  return gulp.src("tempSprites/*.css")
     .pipe(cleanCSS())
+    .pipe(concat("all-spritesheets.css"))
     .pipe(gulp.dest("./css/"));
 })
 

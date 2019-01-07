@@ -354,7 +354,7 @@ function getQuestByName(name) {
 					"questSize":questSize,
 					"other":val.name,
 					"type":"b",
-					"attackList":val.attackListB
+					"attackList":val.attackList
 					};
 			return false;
 			}

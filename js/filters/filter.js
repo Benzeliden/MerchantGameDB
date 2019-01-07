@@ -143,7 +143,6 @@ angular.module('mainApp')
 					}
 					icoType = null
 				}
-				console.log("test input", input, icoType)
 	
 				if (icoType == null) {
 					icoType = "Quests/"

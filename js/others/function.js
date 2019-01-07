@@ -265,105 +265,11 @@ function getPotionByName(name) {
 	return pot;
 }
 
-function getQuestByName(name) {
-	var quest = "";
-	$.each(jsonQuests, function(index, val) {
-		if(val.name == name)
-			{
-			val.region2 = regionById(val.region);
-			var questSize = 1;
-			if(val.hasOwnProperty("questSize"))
-				{
-				questSize = val.questSize;
-				}
-			if(val.title.length == 0)
-				{
-				val.title = "Normal";
-				}
-				
-			var other = "";
-			if(val.hasOwnProperty("nameB"))
-				{
-				other = val.nameB;
-				}
-			
-			// console.log(val.title.length);
-			quest = {
-					"name": val.name,
-					"nickname": val.nickname,
-					"image":val.image,
-					"enemyImage":val.enemyImage,
-					"title":val.title,
-					"levelReq":val.levelReq,
-					"exp":val.exp,
-					"gold":val.gold,
-					"time":val.time,
-					"enemyHp":val.enemyHp,
-					"enemyAtk":val.enemyAtk,
-					"enemyMatk":val.enemyMatk,
-					"enemyDef":val.enemyDef,
-					"enemyMdef":val.enemyMdef,
-					"enemyEva":val.enemyEva,
-					"reward1":val.rewardA1,
-					"reward2":val.rewardA2,
-					"reward3":val.rewardA3,
-					"reward4":val.rewardA4,
-					"region":val.region,
-					"region2":val.region2,
-					"questSize":questSize,
-					"other":other,
-					"type":"a",
-					"attackList":val.attackList
-					};
-			return false;
-			}
-		else if(val.nameB == name)
-			{
-			val.region2 = regionById(val.region)
-			var questSize = 1;
-			if(val.hasOwnProperty("questSize"))
-				{
-				questSize = val.questSize;
-				}
-			if(val.title.length == 0)
-				{
-				val.title = "Normal";
-				}
-			quest = {
-					"name": val.nameB,
-					"nickname": val.nicknameB,
-					"image":val.image, // currently in game imageB is not used
-					"enemyImage":val.enemyImageB,
-					"title":val.titleB,
-					"levelReq":val.levelReq,
-					"exp":val.expB,
-					"gold":val.goldB,
-					"time":val.timeB,
-					"enemyHp":val.enemyHpB,
-					"enemyAtk":val.enemyAtkB,
-					"enemyMatk":val.enemyMatkB,
-					"enemyDef":val.enemyDefB,
-					"enemyMdef":val.enemyMdefB,
-					"enemyEva":val.enemyEvaB,
-					"reward1":val.rewardB1,
-					"reward2":val.rewardB2,
-					"reward3":val.rewardB3,
-					"reward4":val.rewardB4,
-					"region":val.region,
-					"region2":val.region2,
-					"questSize":questSize,
-					"other":val.name,
-					"type":"b",
-					"attackList":val.attackListB
-					};
-			return false;
-			}
-	})
-	return quest;
-}
-
 function getReward(name)
 	{
+		if (!jsonParcel[name]){
+			return null
+		}
 	var rewards = [];
 	rewards.nilOdds = jsonParcel[name].nilOdds;
 	rewards.totalOdds = 0;
@@ -521,30 +427,6 @@ function usedToCraftFromEquipment(id) {
 			})
 	})
 	return crafted;
-}
-
-function getQuestNamesByRegioName(name) {
-	var regio = 0;
-	if(name == "Tuvale Forest"){regio = 1}
-	else if(name == "Yarsol Cove"){regio = 2}
-	else if(name == "Aldur Highlands"){regio = 3}
-	else if(name == "Vulkrum Badlands"){regio = 4}
-	else if(name == "Grimhal Volcano"){regio = 5}
-	else if(name == "Frentir Chasm"){regio = 6}
-
-	var names = [];
-	$.each(jsonQuests, function(index, val)
-		{
-		if(val.region == regio && val.title != "Placeholder")
-			{
-			names.push(val.name);
-			if(val.nameB)
-				{
-				names.push(val.nameB);
-				}
-			}
-		});
-	return names;
 }
 
 function getPrefixStatByName(name) {

@@ -14,7 +14,7 @@
 		<tbody>
 			<tr ng-repeat="quest in quests">
 				<td class="center region-icon"><div ng-class="::quest.image | imageToCssClass"></div></td>
-				<td><a href="#!/quests/{{quest.name}}">{{quest.name}}</a></td>
+				<td><a href="#!/quests/{{quest.name}}?gid={{quest.gid}}">{{quest.name}}</a></td>
 				<td>{{quest.title}}</td>
 				<td class="center">{{quest.levelReq}}</td>
 				<td><img class='coin-img' src='img/coin.png'>{{quest.gold}}</td>

@@ -1,8 +1,8 @@
 //Controller for Quests
 angular.module('mainApp')
-	.controller('questCtrl', function ($scope, $routeParams, questService) {
+	.controller('questCtrl', function ($scope, $routeParams, questService, regionService) {
 		$scope.Math = Math
-		$scope.quest = getQuestByName($routeParams.id);
+		$scope.quest = regionService.getQuestByName($routeParams.id, $routeParams.gid);
 		$scope.mats = jsonMaterials;
 		$scope.eq = jsonEquipments;
 		$scope.jsonAbility = jsonAbility;

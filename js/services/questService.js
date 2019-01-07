@@ -83,7 +83,7 @@ angular.module("mainApp").service("questService", function () {
             }
         });
 
-        function createMonsterFrom1_2Reward(val, reward, isB) {
+        function createMonsterFrom1_2Reward(val, reward, isB, questIdx) {
             return {
                 name: isB ? val.nameB : val.name,
                 rarity: isB ? val.titleB : val.title,
@@ -92,11 +92,12 @@ angular.module("mainApp").service("questService", function () {
                 oddsMax: 100,
                 min: Math.min(reward[1] * minGradeModifier + luck * 0.1, 5), 
                 max: Math.min(reward[2] * maxGradeModifier + luck * 0.1, 5),
-                region: regionById(val.region)
+                region: regionById(val.region),
+                gid: questIdx
             }
         }
 
-        function createMonsterFrom3_4Reward(val, indexOfReward, isB) {
+        function createMonsterFrom3_4Reward(val, indexOfReward, isB, questIdx) {
             return {
                 name: isB ? val.nameB : val.name,
                 rarity: isB ? val.titleB : val.title,
@@ -105,51 +106,52 @@ angular.module("mainApp").service("questService", function () {
                 oddsMax: listDrops[indexOfReward].oddsMax,
                 min: listDrops[indexOfReward].min, 
                 max: listDrops[indexOfReward].max, 
-                region: regionById(val.region)
+                region: regionById(val.region),
+                gid: questIdx
             }
         }
 
         $.each(jsonQuests, function (index, val) {
             if (val.title != "Placeholder") {
                 if (val.rewardA1[0] - 1 == id) {
-                    var monster = createMonsterFrom1_2Reward(val, val.rewardA1, false)
+                    var monster = createMonsterFrom1_2Reward(val, val.rewardA1, false, index)
                     monsters.push(monster)
                 }
                 else if (val.rewardA2[0] - 1 == id) {
-                    var monster = createMonsterFrom1_2Reward(val, val.rewardA2, false)
+                    var monster = createMonsterFrom1_2Reward(val, val.rewardA2, false, index)
                     monsters.push(monster)
                 }
 
                 var indexOf = listDropsName.indexOf(val.rewardA3)
                 if (indexOf > -1) {
-                    var monster = createMonsterFrom3_4Reward(val, indexOf, false)
+                    var monster = createMonsterFrom3_4Reward(val, indexOf, false, index)
                     monsters.push(monster)
                 }
 
                 indexOf = listDropsName.indexOf(val.rewardA4)
                 if (indexOf > -1) {
-                    var monster = createMonsterFrom3_4Reward(val, indexOf, false)
+                    var monster = createMonsterFrom3_4Reward(val, indexOf, false, index)
                     monsters.push(monster)
                 }
 
                 if (val.hasOwnProperty("nameB")) {
                     if (val.rewardB1[0] - 1 == id) {
-                        var monster = createMonsterFrom1_2Reward(val, val.rewardB1, true)
+                        var monster = createMonsterFrom1_2Reward(val, val.rewardB1, true, index)
                         monsters.push(monster)
                     }
                     else if (val.rewardB2[0] - 1 == id) {
-                        var monster = createMonsterFrom1_2Reward(val, val.rewardB2, true)
+                        var monster = createMonsterFrom1_2Reward(val, val.rewardB2, true, index)
                         monsters.push(monster)
                     }
 
                     indexOf = listDropsName.indexOf(val.rewardB3)
                     if (indexOf > -1) {
-                        var monster = createMonsterFrom3_4Reward(val, indexOf, true)
+                        var monster = createMonsterFrom3_4Reward(val, indexOf, true, index)
                         monsters.push(monster)
                     }
                     indexOf = listDropsName.indexOf(val.rewardB4)
                     if (indexOf > -1) {
-                        var monster = createMonsterFrom3_4Reward(val, indexOf, true)
+                        var monster = createMonsterFrom3_4Reward(val, indexOf, true, index)
                         monsters.push(monster)
                     }
                 }

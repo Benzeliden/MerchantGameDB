@@ -1,14 +1,9 @@
 //Controller for Regions
 angular.module('mainApp')
-	.controller('regioCtrl', function($scope, $routeParams) {
+	.controller('regioCtrl', function($scope, $routeParams, regionService) {
 		$scope.regioName = $routeParams.id;
-		$scope.questNames = getQuestNamesByRegioName($routeParams.id);
 		$scope.mats = jsonMaterials;
 		$scope.eq = jsonEquipments;
-		var quests = []
-		$.each($scope.questNames, function(index, val)
-			{
-			quests.push(getQuestByName(val))
-			});
-		$scope.quests = quests;
+		
+		$scope.quests = regionService.getQuestsForRegion($routeParams.id);
 	})
