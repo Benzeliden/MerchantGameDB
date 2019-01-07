@@ -119,10 +119,10 @@ angular.module('mainApp')
 	})
 	.filter('imageToCssClass', function () {
 		var mapping = {
-			"Armor/": "ico-armor",
-			"Materials/": "ico-mat",
-			"Weapons/": "ico-weap",
-			"Consumables/": "ico-pot",
+			"Armor/": "ico-item",
+			"Materials/": "ico-item",
+			"Weapons/": "ico-item",
+			"Consumables/": "ico-item",
 			"Quests/": "ico-quest",
 			"Skills/": "ico-skill",
 		};
@@ -132,19 +132,32 @@ angular.module('mainApp')
 				icoTypes.push(i);
 			}
 		}
-		return function (input) {
-			var icoType;
-			//todo: handle undefined images?
-			for (var i = 0;i<icoTypes.length;i++){
-				icoType = icoTypes[i]; 
-				if (input.indexOf(icoType) === 0){
-					break;
+		return function (input, cssClass) {
+			if (cssClass == undefined) {
+				var icoType;
+				//todo: handle undefined images?
+				for (var i = 0;i<icoTypes.length;i++){
+					icoType = icoTypes[i]; 
+					if (input.indexOf(icoType) === 0){
+						break;
+					}
+					icoType = null
 				}
+				console.log("test input", input, icoType)
+	
+				if (icoType == null) {
+					icoType = "Quests/"
+					input = icoType + input
+				}
+	
+				cssClass = mapping[icoType];
+
+				input = input.replace(icoType, cssClass + "-")
+			}else{
+				input = cssClass + "-" + input
 			}
 
-			var cssClass = mapping[icoType];
-
-			var res = cssClass + " " + input.replace(icoType, cssClass + "-").replace("/", "-").replace(" ", "-").replace(".png", "");
+			var res = cssClass + " " + input.replace("/", "-").replace(" ", "-").replace(".png", "");
 			return res;
 		}
 	})

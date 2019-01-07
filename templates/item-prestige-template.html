@@ -1,0 +1,9 @@
+<div class="prefix-adjustment-hold">
+  <label>Prestige</label>
+  <select id="prefix-select"
+            ng-options="k as v.name for (k, v) in listOfItemPrestige"
+            ng-model="prestigeLevel"
+            ng-init="prestigeLevel=prestigeLevel"
+            ng-change="suffixPrefixChange()">
+  </select>
+</div>
