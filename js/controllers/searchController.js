@@ -12,7 +12,7 @@ angular.module('mainApp')
 				else if (selected.originalObject.type == "Armor") { URLextender = "items/armor/" }
 				else if (selected.originalObject.type == "Trinket") { URLextender = "items/trinket/" }
 				else if (selected.originalObject.type == "Material") { URLextender = "items/material/" }
-				else if (selected.originalObject.type == "Potion") { URLextender = "items/potion/" }
+				else if (selected.originalObject.type == "Potion") { URLextender = "items/consumable/" }
 				else { 
 					URLextender = "quests/"
 					postfix = "?gid=" + selected.originalObject.gid

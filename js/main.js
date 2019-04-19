@@ -52,7 +52,7 @@ var mainApp = angular.module('mainApp', ['snap', 'angucomplete-alt', 'ngRoute', 
 			templateUrl: 'pages/materials.html',
 			controller: 'materialCtrl'
 		})
-		.when('/items/potion/:id', {
+		.when('/items/consumable/:id', {
 			templateUrl: 'pages/potions.html',
 			controller: 'potionCtrl'
 		})
@@ -70,7 +70,7 @@ var mainApp = angular.module('mainApp', ['snap', 'angucomplete-alt', 'ngRoute', 
 			templateUrl: 'pages/itemTrinket.html',
 			controller: 'itemTrinketCtrl'
 		})
-		.when('/items/potions', {
+		.when('/items/consumables', {
 			templateUrl: 'pages/itemPotion.html',
 			controller: 'itemPotionCtrl'
 		})

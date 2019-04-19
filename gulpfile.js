@@ -198,6 +198,7 @@ gulp.task('pack-json', function () {
         "var jsonHeroes = jsonData.HeroList;" +
         "var jsonMaterials = jsonData.MaterialList;" +
         "var jsonPotions = jsonData.PotionList;" +
+        "var jsonMaps = jsonData.MapList;" +
         "var jsonQuests = jsonData.QuestList;" +
         "var jsonPrefixes = jsonData.PrefixList;" +
         "var jsonSuffixes = jsonData.SuffixList;" +
