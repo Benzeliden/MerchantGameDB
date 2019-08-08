@@ -17,11 +17,7 @@ angular.module('mainApp')
 		}
 		$scope.craft = usedToCraftFromEquipment($scope.itemID);
 
-		itemsService.initGradeFromRoute($scope, $routeParams);
-		itemsService.initSuffixFromRoute($scope, $routeParams);
-		itemsService.initPrefixFromRoute($scope, $routeParams);
-		itemsService.initPrestigeLevelFromRoute($scope, $routeParams);
-		itemsService.initQuality($scope);
+		itemsService.initFromRoute($scope, $routeParams);
 
 		$scope.itemAtk = itemsService.getBaseStat($scope, "atk")
 		$scope.itemMatk = itemsService.getBaseStat($scope, "matk")
@@ -30,10 +26,7 @@ angular.module('mainApp')
 		
 		//ON SUFFIX/PREFIX/GRADE change
 		$scope.suffixPrefixChange = function() {
-			var objectURL = "#!/items/weapon/"+$routeParams.id+"?suffix="+$scope.suffix+"&prefix="+$scope.prefix+"&grade="+$scope.grade;
-			if ($scope.prestigeLevel > 0) {
-				objectURL += "&prestigeLevel=" + $scope.prestigeLevel
-			}
+			var objectURL = itemsService.constructUrl($scope, "#!/items/weapon/" + $routeParams.id)
 			$(location).attr('href', objectURL);
 		}
 	})

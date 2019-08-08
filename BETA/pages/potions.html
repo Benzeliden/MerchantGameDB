@@ -23,7 +23,7 @@
 		<td colspan=2>{{potion.desc1}} {{potion.desc2}}</td>
 	</tr>
 	<tr>
-		<td colspan=2>Created by the Alchemist</td>
+		<td colspan=2>Created by the {{crafterName}}</td>
 	</tr>
 </table>
 
@@ -86,7 +86,7 @@
 			<div ng-class="::craf.image | imageToCssClass">
 		</td>
 		<td>
-			<a class="quality-{{craf.rarity}}" href="#!/items/potion/{{craf.name}}">{{craf.name}}</a>
+			<a class="quality-{{craf.rarity}}" href="#!/items/consumable/{{craf.name}}">{{craf.name}}</a>
 		</td>
 		<td>{{craf.amount}}</td>
 	</tr>

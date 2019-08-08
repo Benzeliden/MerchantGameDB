@@ -53,17 +53,40 @@ angular.module("mainApp").service("itemsService", function () {
         //todo: move item prestige params to json file
         $scope.listOfItemPrestige = [
             {
-                name:"None"
+                name: "None"
             },
             {
-                name:"1"
+                name: "1"
             }
         ]
         $scope.prestigeLevel = "0";
 
-        if ($routeParams.prestigeLevel) { //If there is a ?prefix=x in the URL
+        if ($routeParams.prestigeLevel) {
             $scope.prestigeLevel = $routeParams.prestigeLevel
         }
+
+        var plevelNumber = +$scope.prestigeLevel
+        $scope.prestigeLevelNumber = isNaN(plevelNumber) ? 0 : plevelNumber
+    }
+
+    self.initFromRoute = function ($scope, $routeParams) {
+        self.initGradeFromRoute($scope, $routeParams);
+        if ($scope.item.crafterID != 6) {
+            self.initSuffixFromRoute($scope, $routeParams);
+        }
+        self.initPrefixFromRoute($scope, $routeParams);
+        self.initPrestigeLevelFromRoute($scope, $routeParams);
+        self.initQuality($scope);
+
+        $scope.itemValue = self.getItemValue($scope.item, $scope.prestigeLevelNumber)
+    }
+
+    self.getItemValue = function (itemData, prestigeLevel) {
+        var value = itemData.value
+        if (prestigeLevel && prestigeLevel > 0) {
+            value = value * 2 * prestigeLevel
+        }
+        return value
     }
 
     self.getPrefixById = function (prefixId) {
@@ -94,7 +117,7 @@ angular.module("mainApp").service("itemsService", function () {
     }
 
     self.getBaseStat = function ($scope, name) {
-        var level = self.getLevelForAscendedItem($scope.item, +$scope.prestigeLevel)
+        var level = self.getLevelForAscendedItem($scope.item, $scope.prestigeLevelNumber)
         var baseStat = $scope.itemBaseStat[name + "Base"]
         var plvlStat = $scope.itemBaseStat[name + "Lvl"]
         return baseStat + plvlStat * level
@@ -105,7 +128,8 @@ angular.module("mainApp").service("itemsService", function () {
         min: [1.1, 1.2],
         low: [1.25, 1.5],
         mid: [1.5, 2],
-        high: [2, 3],
+        high: [1.75,2.5],
+        super: [2,3]
     }
     var ascStat = {
         str: av.high,
@@ -116,9 +140,9 @@ angular.module("mainApp").service("itemsService", function () {
         atkBns: av.high,
         matkBns: av.high,
         accBns: av.mid,
-        critBns: av.mid,
-        defBns: av.high,
-        mdefBns: av.high,
+        critBns: av.min,
+        defBns: av.mid,
+        mdefBns: av.mid,
         hpBns: av.high,
         apMod: av.none,
         speed: av.none,
@@ -143,17 +167,40 @@ angular.module("mainApp").service("itemsService", function () {
                 var min = self.getStatAfterGrade(value[0], $scope.minGradeModifier)
                 var max = self.getStatAfterGrade(value[1], $scope.maxGradeModifier)
 
-                var prestigeLevel = + $scope.prestigeLevel
+                var prestigeLevel = $scope.prestigeLevelNumber
                 if (prestigeLevel > 0) {
                     var mult = self.getAscendingMulti(key, prestigeLevel)
-                    min = Math.round(min* mult)
-                    max = Math.round(max* mult)
+                    min = Math.round(min * mult)
+                    max = Math.round(max * mult)
                 }
                 newBonus[key] = [min, max]
             }
         }
 
-        console.log("bonus stats", newBonus)
+        //console.log("bonus stats", newBonus)
         return newBonus
+    }
+
+    self.constructUrl = function ($scope, baseUrl) {
+        var objectURL = baseUrl
+
+        var hasParam = false
+        if ($scope.suffix && $scope.suffix > 0) {
+            objectURL += "?suffix=" + $scope.suffix
+            hasParam = true
+        }
+        if ($scope.prefix && $scope.prefix > 0) {
+            objectURL += (hasParam ? "&" : "?") + "prefix=" + $scope.prefix
+            hasParam = true
+        }
+        if ($scope.grade && $scope.grade > 0) {
+            objectURL += (hasParam ? "&" : "?") + "grade=" + $scope.grade
+            hasParam = true
+        }
+        if ($scope.prestigeLevel && $scope.prestigeLevel > 0) {
+            objectURL += (hasParam ? "&" : "?") + "prestigeLevel=" + $scope.prestigeLevel
+            hasParam = true
+        }
+        $(location).attr('href', objectURL);
     }
 });

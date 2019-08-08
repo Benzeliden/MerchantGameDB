@@ -25,7 +25,7 @@ $(document).ready(function()  {
       "<li><a href='#!/items/weapons'>Weapons</a></li>",
       "<li><a href='#!/items/armors'>Armors</a></li>",
       "<li><a href='#!/items/trinkets'>Trinkets</a></li>",
-      "<li><a href='#!/items/potions'>Potions</a></li>",
+      "<li><a href='#!/items/consumables'>Consumables</a></li>",
       "<li><a href='#!/items/materials'>Materials</a></li>",
     "</ul>"
   ].join("");

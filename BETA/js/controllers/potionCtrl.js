@@ -13,5 +13,6 @@ angular.module('mainApp')
 		if ($scope.craft.length == 0) { $scope.craft = "" }
 		
         $scope.craftTimeMin = jsonGrades["0"].craftTimeMin;
-        $scope.craftTimeMax = jsonGrades["0"].craftTimeMax;
+		$scope.craftTimeMax = jsonGrades["0"].craftTimeMax;
+		$scope.crafterName = $scope.potion.crafterID == 5 ? "Alchemist" : "Scribe"
 	})

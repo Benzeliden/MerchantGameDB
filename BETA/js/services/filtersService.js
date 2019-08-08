@@ -107,6 +107,7 @@ angular.module("mainApp").service("filtersService", function () {
             Health: { title: "Health" },
             Boost: { title: "Boost" },
             Enchant: { title: "Enchant" },
+            Scroll: { title: "Scroll" },
         }
     }
 

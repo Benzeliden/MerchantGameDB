@@ -80,7 +80,7 @@ function getMaterialByIdSpec(materials, amount, types) {
 			if(types[index] == "consumable")
 				{
 				var search = jsonPotions[val-1];
-				what = "potion";
+				what = "consumable";
 				}
 			else if(types[index] == "equipment")
 				{

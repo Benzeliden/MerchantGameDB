@@ -1,4 +1,4 @@
-<h1>The Potions of Merchant</h1>
+<h1>The Consumables of Merchant</h1>
 <p>Looking for a potion? You've come to the place.</p>
 
 
@@ -26,14 +26,14 @@
         <span ng-class="::item.image | imageToCssClass"></span>
       </td>
       <td>
-        <a class='quality-{{item.rarity}}' href="#!/items/potion/{{item.name}}">{{item.name}}</a>
+        <a class='quality-{{item.rarity}}' href="#!/items/consumable/{{item.name}}">{{item.name}}</a>
       </td>
       <td class="center">{{item.cost}}
         <img style="width:12px" src="img/coin.png">
       </td>
     </tr>
     <tr>
-      <td>{{item.desc1}}</td>
+      <td>{{item.desc1}} {{item.desc2}}</td>
       <td class="center">Lv. {{item.itemLevel}}</td>
     </tr>
   </tbody>
