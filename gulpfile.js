@@ -101,7 +101,8 @@ gulp.task('regenerate-search', function (callback) {
   for (var i = 0; i < mats.length; i++) {
     var item = mats[i];
     if (item.image && item.image.substr(-1) != "/" &&
-      item.image != "Materials/Region_6/Chieftains_Blade.png") {
+      item.image != "Materials/Region_6/Chieftains_Blade.png" &&
+      item.image != "Materials/Region_6/Chieftains_Blade") {
       item.dbTier = getMaterialTier(item)
       newMats.push(item);
       toSave.push({
@@ -301,7 +302,7 @@ gulp.task('sprites', function (callback) {
 
     var stream = spriteData.pipe(
       gulpif('*.png', gulp.dest('./img/spritesheets/'), gulp.dest('./tempSprites/')));
-      
+
     console.log("wtf")
     makeCallbacks(stream);
   }

@@ -101,7 +101,8 @@ gulp.task('regenerate-search', function (callback) {
   for (var i = 0; i < mats.length; i++) {
     var item = mats[i];
     if (item.image && item.image.substr(-1) != "/" &&
-      item.image != "Materials/Region_6/Chieftains_Blade.png") {
+      item.image != "Materials/Region_6/Chieftains_Blade.png" &&
+      item.image != "Materials/Region_6/Chieftains_Blade") {
       item.dbTier = getMaterialTier(item)
       newMats.push(item);
       toSave.push({
@@ -157,17 +158,19 @@ gulp.task('regenerate-search', function (callback) {
       toSave.push({
         name: quest.name,
         type: "Quest",
-        subType: quest.title || "Normal",
+        subType: (quest.title || "Normal") + ". Region " + quest.region,
         rarity: "1",
         icon: quest.image,
+        gid: i
       });
       if (quest.nameB != null) {
         toSave.push({
           name: quest.nameB,
           type: "Quest",
-          subType: quest.titleB || "Rare",
+          subType: (quest.titleB || "Rare") + ". Region " + quest.region,
           rarity: "1",
           icon: quest.image, //imageB is not used in the game currently
+          gid: i
         });
       }
     } else {
@@ -196,6 +199,7 @@ gulp.task('pack-json', function () {
         "var jsonHeroes = jsonData.HeroList;" +
         "var jsonMaterials = jsonData.MaterialList;" +
         "var jsonPotions = jsonData.PotionList;" +
+        "var jsonMaps = jsonData.MapList;" +
         "var jsonQuests = jsonData.QuestList;" +
         "var jsonPrefixes = jsonData.PrefixList;" +
         "var jsonSuffixes = jsonData.SuffixList;" +
@@ -298,7 +302,7 @@ gulp.task('sprites', function (callback) {
 
     var stream = spriteData.pipe(
       gulpif('*.png', gulp.dest('./img/spritesheets/'), gulp.dest('./tempSprites/')));
-      
+
     console.log("wtf")
     makeCallbacks(stream);
   }
