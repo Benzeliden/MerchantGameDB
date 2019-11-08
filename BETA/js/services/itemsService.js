@@ -112,9 +112,11 @@ angular.module("mainApp").service("itemsService", function () {
         return Math.ceil(result)
     }
 
+    var prestigeLevelBonus = [40, 80]
+
     self.getLevelForAscendedItem = function (item, ascLevel) {
         if (ascLevel && ascLevel > 0) {
-            return item.itemLevel + 40
+            return item.itemLevel + prestigeLevelBonus[ascLevel - 1]
         }
         return item.itemLevel
     }
