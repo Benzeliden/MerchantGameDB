@@ -57,6 +57,9 @@ angular.module("mainApp").service("itemsService", function () {
             },
             {
                 name: "1"
+            },
+            {
+                name: "2"
             }
         ]
         $scope.prestigeLevel = "0";

@@ -57,6 +57,9 @@ angular.module("mainApp").service("itemsService", function () {
             },
             {
                 name: "1"
+            },
+            {
+                name: "2"
             }
         ]
         $scope.prestigeLevel = "0";
@@ -128,7 +131,8 @@ angular.module("mainApp").service("itemsService", function () {
         min: [1.1, 1.2],
         low: [1.25, 1.5],
         mid: [1.5, 2],
-        high: [2, 3],
+        high: [1.75,2.5],
+        super: [2,3]
     }
     var ascStat = {
         str: av.high,
@@ -139,9 +143,9 @@ angular.module("mainApp").service("itemsService", function () {
         atkBns: av.high,
         matkBns: av.high,
         accBns: av.mid,
-        critBns: av.mid,
-        defBns: av.high,
-        mdefBns: av.high,
+        critBns: av.min,
+        defBns: av.mid,
+        mdefBns: av.mid,
         hpBns: av.high,
         apMod: av.none,
         speed: av.none,
