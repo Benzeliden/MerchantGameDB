@@ -43,8 +43,9 @@
           <td class='gear-tier'>Tier {{::item.dbTier}}</td>
         </tr>
         <tr>
-          <td colspan=2>{{::Math.ceil(Math.ceil( itemDef * minGradeModifier ) * suffixMod ) | number:0}} - 
-												{{::Math.ceil(Math.ceil( itemDef * maxGradeModifier ) * suffixMod ) | number:0}} Physical Defense</td>
+          <td>{{::Math.ceil(Math.ceil( itemDef * minGradeModifier ) * suffixMod ) | number:0}} - 
+                        {{::Math.ceil(Math.ceil( itemDef * maxGradeModifier ) * suffixMod ) | number:0}} Physical Defense</td>
+          <td class='gear-tier'>Id: {{itemID+1}}</td>
         </tr>
         <tr>
           <td colspan=2>{{::Math.ceil(Math.ceil( itemMdef * minGradeModifier ) * suffixMod ) | number:0}} - 

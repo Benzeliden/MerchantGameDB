@@ -1,79 +1,81 @@
 <div class='object-hold'>
-    <div class='object-image item-quality-{{::finalRarity}}-bg'>
-      <div ng-class="::item.image | imageToCssClass"></div>
-      <span ng-if="grade > '0'" class="item-grade-{{::gradeName}}"></span>
-    </div>
-  
-    <!-- Grade Adjustment -->
-    <div item-grade></div>
-  
-    <!-- Suffix Adjustment -->
-    <div item-suffix></div>
-  
-    <!-- Prefix Adjustment -->
-    <div item-prefix></div>
+  <div class='object-image item-quality-{{::finalRarity}}-bg'>
+    <div ng-class="::item.image | imageToCssClass"></div>
+    <span ng-if="grade > '0'" class="item-grade-{{::gradeName}}"></span>
+  </div>
 
-    <div item-prestige></div>
-  
-    <!-- Copy URL Button -->
-    <div item-page-copy-button></div>
-  
-    <!-- Compare Button -->
-    <div item-page-compare-button></div>
-  
-    <table class='gear-table'>
-      <tr>
-        <td class='gear-name'>
-          <h3 class="quality-{{::finalRarity}}">
-            <span id="prefix-hold">{{::prefixStat.name}} </span>
-            <span class="item-name">{{::item.name}}</span> 
-            <span ng-if="hasSuffix"><span id="suffix-alone">{{listOfSuffix[suffix].name}}</span></span>
-          </h3>
-        </td>
-        <td class='gear-cost'>
-          {{::rarityMod[finalRarity].min * itemValue}}-{{::rarityMod[finalRarity].max * itemValue}} <img class='coin-img' ng-src="img/coin.png">
-        </td>
-      </tr>
-      <tr>
-        <td colspan=2 class='gear-type'><span id="primary-type">Weapon</span> - {{item.subType}}</td>
-      </tr>
-      <tr>
-        <td>Level {{item.itemLevel}}</td>
-        <td class='gear-tier'>Tier {{item.dbTier}}</td>
-      </tr>
-      <tr>
-        <td colspan=2>{{Math.ceil(Math.ceil( itemAtk * minGradeModifier ) * suffixMod ) | number:0}} - 
-                      {{Math.ceil(Math.ceil( itemAtk * maxGradeModifier ) * suffixMod ) | number:0}} Physical Attack</td>
-      </tr>
-      <tr>
-        <td colspan=2>{{Math.ceil(Math.ceil( itemMatk * minGradeModifier ) * suffixMod ) | number: 0}} - 
-                      {{Math.ceil(Math.ceil( itemMatk * maxGradeModifier ) * suffixMod ) | number: 0}} Magical Attack</td>
-      </tr>
-      <tr>
-        <td colspan=2>{{Math.ceil(Math.ceil( itemAcc * minGradeModifier ) * suffixMod ) | number:0}} - 
-                      {{Math.ceil(Math.ceil( itemAcc * maxGradeModifier ) * suffixMod ) | number:0}} Accuracy</td>
-      </tr>
-  
-       <!-- Bonus Stats -->
-      <tr class='bonus-stat-row'>
-        <td colspan=2 class='bonus-stats'>Additional Stats</td>
-      </tr>
-      <tr ng-repeat="(key, value) in bonusStats">
-        <td colspan=2>
-          {{key | changeStat}}: {{ value[0] }}-{{ value[1] }}
-        </td>
-      </tr>
-      <tr ng-show="prefix">
-        <td colspan="2">
-          <span class="prefix-stat" ng-repeat="(k, v) in prefixStat.stats">
-            +{{v | fixPercentStat:k}} {{k | changeStat}} ({{prefixStat.name}})
-          </span>
-        </td>
-      </tr>
-    </table>
-  
-    <div class="clear"></div>
-  
+  <!-- Grade Adjustment -->
+  <div item-grade></div>
+
+  <!-- Suffix Adjustment -->
+  <div item-suffix></div>
+
+  <!-- Prefix Adjustment -->
+  <div item-prefix></div>
+
+  <div item-prestige></div>
+
+  <!-- Copy URL Button -->
+  <div item-page-copy-button></div>
+
+  <!-- Compare Button -->
+  <div item-page-compare-button></div>
+
+  <table class='gear-table'>
+    <tr>
+      <td class='gear-name'>
+        <h3 class="quality-{{::finalRarity}}">
+          <span id="prefix-hold">{{::prefixStat.name}} </span>
+          <span class="item-name">{{::item.name}}</span>
+          <span ng-if="hasSuffix"><span id="suffix-alone">{{listOfSuffix[suffix].name}}</span></span>
+        </h3>
+      </td>
+      <td class='gear-cost'>
+        {{::rarityMod[finalRarity].min * itemValue}}-{{::rarityMod[finalRarity].max * itemValue}} <img class='coin-img'
+          ng-src="img/coin.png">
+      </td>
+    </tr>
+    <tr>
+      <td colspan=2 class='gear-type'><span id="primary-type">Weapon</span> - {{item.subType}}</td>
+    </tr>
+    <tr>
+      <td>Level {{item.itemLevel}}</td>
+      <td class='gear-tier'>Tier {{item.dbTier}}</td>
+    </tr>
+    <tr>
+      <td>{{Math.ceil(Math.ceil( itemAtk * minGradeModifier ) * suffixMod ) | number:0}} -
+        {{Math.ceil(Math.ceil( itemAtk * maxGradeModifier ) * suffixMod ) | number:0}} Physical Attack</td>
+      <td class='gear-tier'>Id: {{itemID+1}}</td>
+    </tr>
+    <tr>
+      <td colspan=2>{{Math.ceil(Math.ceil( itemMatk * minGradeModifier ) * suffixMod ) | number: 0}} -
+        {{Math.ceil(Math.ceil( itemMatk * maxGradeModifier ) * suffixMod ) | number: 0}} Magical Attack</td>
+    </tr>
+    <tr>
+      <td colspan=2>{{Math.ceil(Math.ceil( itemAcc * minGradeModifier ) * suffixMod ) | number:0}} -
+        {{Math.ceil(Math.ceil( itemAcc * maxGradeModifier ) * suffixMod ) | number:0}} Accuracy</td>
+    </tr>
+
+    <!-- Bonus Stats -->
+    <tr class='bonus-stat-row'>
+      <td colspan=2 class='bonus-stats'>Additional Stats</td>
+    </tr>
+    <tr ng-repeat="(key, value) in bonusStats">
+      <td colspan=2>
+        {{key | changeStat}}: {{ value[0] }}-{{ value[1] }}
+      </td>
+    </tr>
+    <tr ng-show="prefix">
+      <td colspan="2">
+        <span class="prefix-stat" ng-repeat="(k, v) in prefixStat.stats">
+          +{{v | fixPercentStat:k}} {{k | changeStat}} ({{prefixStat.name}})
+        </span>
+      </td>
+    </tr>
+  </table>
+
+  <div class="clear"></div>
+
   <!-- Display table showing what items are needed to craft weapon -->
   <table class='crafting-reagents-table'>
     <caption>Weapon Recipe</caption>
@@ -128,11 +130,12 @@
       </tr>
     </thead>
     <tr ng-repeat="craf in ::craft">
-      <td><div ng-class="::craf.image | imageToCssClass"></div></td>
+      <td>
+        <div ng-class="::craf.image | imageToCssClass"></div>
+      </td>
       <td><a class="quality-{{::craf.rarity}}" href="#!/items/weapon/{{::craf.name}}">{{::craf.name}}</a></td>
       <td>{{::craf.amount}}</td>
     </tr>
   </table>
-  
+
   <item-url reddit-name="item.name"></item-url>
-  
