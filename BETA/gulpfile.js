@@ -319,19 +319,18 @@ gulp.task('sprites-css-min', function () {
 })
 
 //required: extract assets before running this
-gulp.task('build-new-version', function (callback) {
-  runSequence('regenerate-search',
-    'pack-json', 'sprites',
-    'sprites-css-min', callback);
-})
+gulp.task('build-new-version', gulp.series('regenerate-search',
+  'pack-json', 'sprites',
+  'sprites-css-min')
+)
 
-gulp.task('default', ['scripts', 'styles']);
+gulp.task('default', gulp.parallel('scripts', 'styles'));
 
 gulp.task('dev-watch', function () {
   var liteServer = require("lite-server");
   liteServer.server();
-  gulp.watch(['./js/**/*.js', '!./js/vendor/*.min.js', '!./js/modules/*.min.js', '!./js/bundle.js'], ['scripts']);
-  gulp.watch('sass/**/*.scss', ['styles']);
+  gulp.watch(['./js/**/*.js', '!./js/vendor/*.min.js', '!./js/modules/*.min.js', '!./js/bundle.js'], gulp.series('scripts'));
+  gulp.watch('sass/**/*.scss', gulp.series('styles'));
 });
 
-gulp.task('dev', ['default', 'dev-watch']);
+gulp.task('dev', gulp.series('default', 'dev-watch'));

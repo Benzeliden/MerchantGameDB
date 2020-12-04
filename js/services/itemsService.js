@@ -175,8 +175,8 @@ angular.module("mainApp").service("itemsService", function () {
                 var prestigeLevel = $scope.prestigeLevelNumber
                 if (prestigeLevel > 0) {
                     var mult = self.getAscendingMulti(key, prestigeLevel)
-                    min = Math.round(min * mult)
-                    max = Math.round(max * mult)
+                    min = Math.ceil(min * mult)
+                    max = Math.ceil(max * mult)
                 }
                 newBonus[key] = [min, max]
             }

@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "set NODE_ENV=production&&gulp",
     "dev": "set NODE_ENV=dev&&gulp dev",
-    "qa": "set NODE_ENV=production&&gulp dev"
+    "qa": "set NODE_ENV=production&&gulp dev",
+    "buildbeta": "set NODE_ENV=production&&gulp --cwd ./BETA/ default"
   },
   "repository": {
     "type": "git",
