@@ -8,7 +8,8 @@
     "start": "set NODE_ENV=production&&gulp",
     "dev": "set NODE_ENV=dev&&gulp dev",
     "qa": "set NODE_ENV=production&&gulp dev",
-    "buildbeta": "set NODE_ENV=production&&gulp --cwd ./BETA/ default"
+    "buildbeta": "set NODE_ENV=production&&gulp --cwd ./BETA/ default",
+    "searchbeta": "set NODE_ENV=production&&gulp --cwd ./BETA/ regenerate-search"
   },
   "repository": {
     "type": "git",
